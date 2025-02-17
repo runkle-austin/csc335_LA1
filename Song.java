@@ -5,13 +5,17 @@ public class Song {
 	private String title;
 	private String artist;
 	private int rating;
+	// private Album album; (add when we make album class)
 	
 	// Constructor
 	
 	private Song (String title, String artist) {
 		this.title = title;
 		this.artist = artist;
+		// can't have default value
 		this.rating = 0;
+
+		// this.album = Album
 	}
 	
 	//Methods 
