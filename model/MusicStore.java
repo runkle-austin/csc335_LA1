@@ -26,7 +26,7 @@ public class MusicStore {
 			line = line.replace(",", "_");
 			line += ".txt";
 			
-			processAlbum(line);
+			artists.add(processAlbum(line));
 			
 			System.out.println(line);
 		}
@@ -35,8 +35,8 @@ public class MusicStore {
 		
 	}
 	
-	// creates album and songs
-	private void processAlbum(String line) throws FileNotFoundException {
+	// creates album, songs, and artist objects
+	private Artist processAlbum(String line) throws FileNotFoundException {
 		File fr = new File(line);
 		Scanner scanner = new Scanner(fr);
 		
@@ -44,24 +44,27 @@ public class MusicStore {
 		String firstLine = scanner.nextLine();
 		String[] firstLineArray = firstLine.split(",");
 		String albumTitle = firstLineArray[0];
-		String artist = firstLineArray[1];
+		String artistName = firstLineArray[1];
 		String genre = firstLineArray[2];
 		int year = Integer.parseInt(firstLineArray[3]);
 		
+		Artist artist = new Artist(artistName);
 		// each line has song title
 		ArrayList<Song> songs = new ArrayList<Song>();
 		while(scanner.hasNext()) {
 			// adds new song from line
-			Song s = new Song(scanner.nextLine(), artist);
+			Song s = new Song(scanner.nextLine(), artistName);
 			songs.add(s);
 			songList.add(s);
+			artist.addSong(s);
 		}
-		Album album = new Album(albumTitle, artist, songs, genre, year);
+		Album album = new Album(albumTitle, artistName, songs, genre, year);
 		albumList.add(album);
-		
+		artist.addAlbum(album);
 		
 		
 		scanner.close();
+		return artist;
 	}
 	
 	public ArrayList<Song> getSongsByArtist(String artist) {

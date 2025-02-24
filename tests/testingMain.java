@@ -15,7 +15,7 @@ public class testingMain {
 		ArrayList<Song> songList = new ArrayList<Song>();
 		songList.add(bit);
 		
-		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt",LocalDate.of(2017, 1,1));
+		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt", 2017);
 		String str = "The Sticks by Mother Mother\nSongs:\nBit by Bit";
 		
 		System.out.print(sticks.toString());

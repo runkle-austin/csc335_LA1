@@ -12,13 +12,13 @@ public class Artist {
 		this.artist = artist;
 	}
 	
-	// protected so user can not add albums through view
-	protected void addAlbum(Album album) {
+	// TODO protected so user can not add albums through view
+	public void addAlbum(Album album) {
 		albums.add(album);
 	}
 	
-	// protected so user can not add songs through view
-	protected void addSong(Song s) {
+	// TODO protected so user can not add songs through view
+	public void addSong(Song s) {
 		songs.add(s);	
 	}
 	
