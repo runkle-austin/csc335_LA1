@@ -16,13 +16,14 @@ public class MusicStore {
 	public MusicStore() throws FileNotFoundException {
 		
 		// loads album file
-		File fr = new File("albums.txt");
+		File fr = new File("albums/albums.txt");
 		Scanner scanner = new Scanner(fr);
 		
 		while(scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			line = line.replace(",", "_");
 			line += ".txt";
+			line = "albums/" + line;
 			
 			artists.add(processAlbum(line));
 		}
@@ -71,5 +72,10 @@ public class MusicStore {
 	// TODO remove escaping references
 	public ArrayList<Song> getSongs(){
 		return songList;
+	}
+
+	public Song[] getSongsByTitle(String title) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
