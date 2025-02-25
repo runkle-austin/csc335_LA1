@@ -2,13 +2,14 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
 import model.Album;
 import model.Song;
+
+
 
 class testAlbum {
 
@@ -17,7 +18,7 @@ class testAlbum {
 		Song bit = new Song("Bit by Bit", "Mother Mother");
 		ArrayList<Song> songList = new ArrayList<Song>();
 		songList.add(bit);
-		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt",LocalDate.of(2017, 1,1));
+		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt", 2017);
 		
 		String str = "The Sticks by Mother Mother\nSongs:\nBit by Bit\n";
 		assertEquals(str, sticks.toString());
@@ -28,12 +29,12 @@ class testAlbum {
 		Song bit = new Song("Bit by Bit", "Mother Mother");
 		ArrayList<Song> songList = new ArrayList<Song>();
 		songList.add(bit);
-		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt",LocalDate.of(2017, 1,1));
+		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt", 2017);
 		
 		String title = "The Sticks";
 		String artist = "Mother Mother";
 		String genre = "alt";
-		LocalDate year = LocalDate.of(2017, 1,1);
+		int year = 2017;
 		
 		assertEquals(title, sticks.getTitle());
 		assertEquals(artist, sticks.getArtist());
@@ -46,7 +47,7 @@ class testAlbum {
 		Song bit = new Song("Bit by Bit", "Mother Mother");
 		ArrayList<Song> songList = new ArrayList<Song>();
 		songList.add(bit);
-		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt",LocalDate.of(2017, 1,1));
+		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt", 2017);
 		
 		ArrayList<Song> copySongs = sticks.getSongs();
 		// tests that they are NOT the same list

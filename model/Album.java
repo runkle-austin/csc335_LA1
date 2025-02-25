@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.time.LocalDate;
 
 public class Album {
 	// Instance Variables
@@ -9,10 +8,10 @@ public class Album {
 	private String artist;
 	private String genre;
 	private String title;
-	private LocalDate year;
+	private int year;
 
 	// Constructor
-	public Album (String title, String artist, ArrayList<Song> songList, String genre, LocalDate year) {
+	public Album (String title, String artist, ArrayList<Song> songList, String genre, int year) {
 		this.songList = songList;
 		this.artist = artist;
 		this.genre = genre;
@@ -20,6 +19,7 @@ public class Album {
 		this.year = year;
 	}
 	
+	// TODO 
 	/* depending on how we decide to implement album, we may want to 
 	 * have a constructor that we can add songs to as we go, rather
 	 * then all at once as an arrayList in the constructor
@@ -63,7 +63,7 @@ public class Album {
 		return genre;
 	}
 
-	public LocalDate getYear() {
+	public int getYear() {
 		return year;
 	}
 	

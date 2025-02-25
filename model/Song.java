@@ -11,6 +11,7 @@ public class Song {
 	public Song (String title, String artist) {
 		this.title = title;
 		this.artist = artist;
+		this.rating = null;
 
 		// this.album = Album
 	}
@@ -34,9 +35,6 @@ public class Song {
 	// @pre rating >= 1, rating <= 5
 	public void setRating(int rating) {
 		this.rating = Rating.getRating(rating);
-		if (rating == 5) {
-			// add to favorites
-		}
 	}
 	
 	public Song createCopy() {
@@ -46,8 +44,4 @@ public class Song {
 	public String toString() {
 		return title + " by " + artist;
 	}
-	
-	
-
-	
 }
