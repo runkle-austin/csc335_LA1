@@ -22,12 +22,17 @@ public class Playlist {
 	    songs.remove(song);
 	}
 
+	// returns a deep copy of songs in playlist
 	public ArrayList<Song> getSongs() {
-	    return new ArrayList<>(songs);
+		ArrayList<Song> copySongs = new ArrayList<Song>();
+		for (Song s: this.songs){
+			// create copy of individual songs
+			copySongs.add(s.createCopy());
+		}
+		return copySongs;
 	}
 
 	public String getName() {
 	    return playlistName;
 	}
 }
-

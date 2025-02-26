@@ -5,13 +5,15 @@ public class Song {
 	private String title;
 	private String artist;
 	private Rating rating;
+	private String album;
 	// private Album album; (add when we make album class)
 	
 	// Constructor
-	public Song (String title, String artist) {
+	public Song (String title, String artist, String album) {
 		this.title = title;
 		this.artist = artist;
 		this.rating = null;
+		this.album = album;
 
 		// this.album = Album
 	}
@@ -31,6 +33,10 @@ public class Song {
 	public Rating getRating() {
 		return rating;
 	}
+	
+	public String getAlbum() {
+		return album;
+	}
 
 	// @pre rating >= 1, rating <= 5
 	public void setRating(int rating) {
@@ -38,10 +44,10 @@ public class Song {
 	}
 	
 	public Song createCopy() {
-		return new Song(this.title, this.artist);
+		return new Song(this.title, this.artist, this.album);
 	}
 	
 	public String toString() {
-		return title + " by " + artist;
+		return title + " by " + artist + " from album " + album + "\n";
 	}
 }
