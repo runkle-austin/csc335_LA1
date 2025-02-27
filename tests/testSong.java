@@ -24,6 +24,12 @@ class testSong {
 	}
 	
 	@Test
+	void testGetAlbum() {
+		Song s = new Song("Little Pistol", "Mother Mother", "Sticks");
+		assertEquals("Sticks", s.getAlbum());
+	}
+	
+	@Test
 	void testgetArtist() {
 		Song s = new Song("Sticks", "Mother Mother", "Sticks");
 		assertEquals("Mother Mother", s.getArtist());
