@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import model.Album;
 import model.Playlist;
 import model.Song;
 
@@ -49,6 +50,15 @@ class testPlaylist {
 		
 		assertEquals(str, "Big Sur was not found\n");
 	}
+	/*
+	@Test 
+	void testGetAllAlbums() {
+		Playlist playlist = new Playlist("test");
+		ArrayList<Song> songs = new ArrayList<Song>();
+		Album a = new Album("Sticks", "Mother Mother", songs, "alt", 2017);
+		playlist.addAlbum(null);
+	}
+	*/
 	
 
 }
