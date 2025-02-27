@@ -3,7 +3,6 @@ package model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class MusicStore {
@@ -120,6 +119,33 @@ public class MusicStore {
 				str += s.toString();
 			}
 		}
+		return str;
+	}
+
+	public String getAllAlbums() {
+		String str = "";
+		if (albumList.isEmpty()) {
+			return "Currently No Albums";
+		} else {
+			for(Album a: albumList) {
+				str += a.getTitle() + " by " + a.getArtist() + " in " + 
+						a.getYear() + " , " + a.getGenre() + "\n";
+			}
+		}
+
+		return str;
+	}
+
+	public String getSongs() {
+		String str = "";
+		if (songList.isEmpty()) {
+			return "Currently No Songs";
+		} else {
+			for(Song s: songList) {
+				str += s.getTitle() + " by " + s.getArtist() + " , " + s.getAlbum() + "\n";
+			}
+		}
+
 		return str;
 	}
 }
