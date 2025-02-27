@@ -16,13 +16,15 @@ public class MusicStore {
 	public MusicStore() throws FileNotFoundException {
 		
 		// loads album file
-		File fr = new File("albums.txt");
+		File fr = new File("albums/albums.txt");
 		Scanner scanner = new Scanner(fr);
 		
 		while(scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			line = line.replace(",", "_");
 			line += ".txt";
+			line = "albums/" + line;
+			
 			
 			artists.add(processAlbum(line));
 		}
@@ -49,7 +51,7 @@ public class MusicStore {
 		ArrayList<Song> songs = new ArrayList<Song>();
 		while(scanner.hasNext()) {
 			// adds new song from line
-			Song s = new Song(scanner.nextLine(), artistName);
+			Song s = new Song(scanner.nextLine(), artistName, albumTitle);
 			songs.add(s);
 			songList.add(s);
 			artist.addSong(s);
@@ -63,13 +65,60 @@ public class MusicStore {
 		return artist;
 	}
 	
-	public ArrayList<Song> getSongsByArtist(String artist) {
-		return null;
-		
+	// returns a deep copy of the songs by artist if artist is found, 
+	// otherwise returns empty arrayList
+	public String getSongsByArtist(String artist) {
+		ArrayList<Song> songs = new ArrayList<Song>();
+		for (Song s: songList) {
+			if (s.getArtist().equals(artist)) {
+				songs.add(s);
+			}
+		}
+		String str = "";
+		for (Song s: songs) {
+			str += s.toString();
+		}
+		return str;
 	}
 	
-	// TODO remove escaping references
-	public ArrayList<Song> getSongs(){
-		return songList;
+	// searches through artists until finding artist with desired name
+	// adds all albums by artist to return String
+	public String getAlbumsByArtist(String artist) {
+		ArrayList<Album> albums = new ArrayList<Album>();
+		for (Album a: albumList) {
+			if (a.getArtist().equals(artist)) {
+				albums.add(a);
+			}
+		}
+		String str = "";
+		for (Album a: albums) {
+			str += a.toString();
+		}
+		return str;
+	}
+
+	
+	public String getAlbumsByTitle(String title) {
+		ArrayList<Album> albums = new ArrayList<Album>();
+		for (Album a: albumList) {
+			if (a.getTitle().equals(title)) {
+				albums.add(a);
+			}
+		}
+		String str = "";
+		for (Album a: albums) {
+			str = a.toString();
+		}
+		return str;
+	}
+
+	public String getSongsByTitle(String title) {
+		String str = "";
+		for(Song s: songList) {
+			if(s.getTitle().equals(title)) {
+				str += s.toString();
+			}
+		}
+		return str;
 	}
 }

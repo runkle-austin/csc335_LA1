@@ -70,7 +70,8 @@ public class Album {
 	// as a note, there will be an extra line after the last song
 	public String toString() {
 		String str = "";
-		str += title + " by " + artist + "\nSongs:\n";
+		str += title + " by " + artist + ", " 
+				+ year + ", " + genre + "\nSongs:\n";
 		for (Song s: songList) {
 			str += s.getTitle() + "\n";
 		}
