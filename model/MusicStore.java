@@ -106,7 +106,7 @@ public class MusicStore {
 			}
 		}
 		String str = "";
-		for (Album a: albumList) {
+		for (Album a: albums) {
 			str = a.toString();
 		}
 		return str;
@@ -119,33 +119,6 @@ public class MusicStore {
 				str += s.toString();
 			}
 		}
-		return str;
-	}
-
-	public String getAllAlbums() {
-		String str = "";
-		if (albumList.isEmpty()) {
-			return "Currently No Albums";
-		} else {
-			for(Album a: albumList) {
-				str += a.getTitle() + " by " + a.getArtist() + " in " + 
-						a.getYear() + " , " + a.getGenre() + "\n";
-			}
-		}
-
-		return str;
-	}
-
-	public String getSongs() {
-		String str = "";
-		if (songList.isEmpty()) {
-			return "Currently No Songs";
-		} else {
-			for(Song s: songList) {
-				str += s.getTitle() + " by " + s.getArtist() + " , " + s.getAlbum() + "\n";
-			}
-		}
-
 		return str;
 	}
 }

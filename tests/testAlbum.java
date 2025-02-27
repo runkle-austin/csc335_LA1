@@ -15,18 +15,18 @@ class testAlbum {
 
 	@Test
 	void testAlbumToString() {
-		Song bit = new Song("Bit by Bit", "Mother Mother");
+		Song bit = new Song("Bit by Bit", "Mother Mother", "Sticks");
 		ArrayList<Song> songList = new ArrayList<Song>();
 		songList.add(bit);
 		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt", 2017);
 		
-		String str = "The Sticks by Mother Mother\nSongs:\nBit by Bit\n";
+		String str = "The Sticks by Mother Mother, 2017, alt\nSongs:\nBit by Bit\n";
 		assertEquals(str, sticks.toString());
 	}
 	
 	@Test
 	void testGetters() {
-		Song bit = new Song("Bit by Bit", "Mother Mother");
+		Song bit = new Song("Bit by Bit", "Mother Mother", "Sticks");
 		ArrayList<Song> songList = new ArrayList<Song>();
 		songList.add(bit);
 		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt", 2017);
@@ -44,7 +44,7 @@ class testAlbum {
 	
 	@Test
 	void testDeepCopy() {
-		Song bit = new Song("Bit by Bit", "Mother Mother");
+		Song bit = new Song("Bit by Bit", "Mother Mother", "Sticks");
 		ArrayList<Song> songList = new ArrayList<Song>();
 		songList.add(bit);
 		Album sticks = new Album("The Sticks", "Mother Mother", songList, "alt", 2017);

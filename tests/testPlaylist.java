@@ -18,17 +18,37 @@ class testPlaylist {
 	}
 	
 	@Test
-	void testSongs() {
+	void testGetSongs() {
 		Playlist playlist = new Playlist("test");
 		Song s = new Song("Big Sur", "Jack Johnson", "All The Light Above It Too");
-		ArrayList<Song> songs = new ArrayList<Song>();
-		assertEquals(playlist.getSongs(), songs);
+
+		// tests empty playlist
+		assertEquals(playlist.getSongs(), "This playlist is empty\n");
 		playlist.addSong(s);
-		songs.add(s);
-		assertEquals(playlist.getSongs(), songs);
-		playlist.removeSong(s);
-		ArrayList<Song> songs2 = new ArrayList<Song>();
-		assertEquals(playlist.getSongs(), songs2);
+		
+		// tests playlist w/ song
+		assertEquals(playlist.getSongs(), s.toString());
 	}
+	
+	@Test
+	void testDuplicateAndRemove() {
+		Playlist playlist = new Playlist("test");
+		Song s = new Song("Big Sur", "Jack Johnson", "All The Light Above It Too");
+		playlist.addSong(s);
+		playlist.addSong(s);
+		String str = playlist.removeSong("Big Sur");
+		
+		assertEquals(str, "Big Sur was removed\n");
+	}
+	
+	@Test
+	void testNotFoundRemove() {
+		Playlist playlist = new Playlist("test");
+		
+		String str = playlist.removeSong("Big Sur");
+		
+		assertEquals(str, "Big Sur was not found\n");
+	}
+	
 
 }

@@ -13,7 +13,7 @@ public class LibraryModel {
 	public LibraryModel() {
 		songs = new ArrayList<>();
 		albums = new ArrayList<>();
-		playlists = new HashMap<>();
+		playlists = new HashMap<>(); 
 		favoriteSongs = new ArrayList<>();
 	}
 
@@ -84,4 +84,3 @@ public class LibraryModel {
 		return new ArrayList<>(favoriteSongs);
 	}
 }
-

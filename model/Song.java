@@ -48,6 +48,6 @@ public class Song {
 	}
 	
 	public String toString() {
-		return title + " by " + artist + " from album " + album + "\n";
+		return title + " by " + artist + " from album: " + album + "\n";
 	}
 }

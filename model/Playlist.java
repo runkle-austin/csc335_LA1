@@ -6,33 +6,62 @@ public class Playlist {
 
 	private String playlistName;
 	private ArrayList<Song> songs;
+	private ArrayList<Album> albums;
 
 	public Playlist(String name) {
 	    this.playlistName = name;
-	    this.songs = new ArrayList<>();
+	    this.songs = new ArrayList<Song>();
+	    this.albums = new ArrayList<Album>();
+	}
+	
+	public String getName() {
+	    return playlistName;
 	}
 
+	// adds song if not already in playlist
 	public void addSong(Song song) {
 	    if (songs.contains(song) == false) {
 	        songs.add(song);
 	    }
 	}
 
-	public void removeSong(Song song) {
-	    songs.remove(song);
+	// adds album if not already in playlist
+	public void addAlbum(String albumTitle) {
+		
+	}
+	
+	public String removeSong(String title) {
+	    for(Song s: songs) {
+	    	if(s.getTitle().equals(title)) {
+	    		songs.remove(s);
+	    		return title + " was removed\n";
+	    	}
+	    }
+	    return title + " was not found\n"; 
 	}
 
-	// returns a deep copy of songs in playlist
-	public ArrayList<Song> getSongs() {
-		ArrayList<Song> copySongs = new ArrayList<Song>();
-		for (Song s: this.songs){
-			// create copy of individual songs
-			copySongs.add(s.createCopy());
+	public String getSongs() {
+		String str = "";
+		if (songs.isEmpty()) {
+			return "This playlist is empty\n";
+		} else {
+			for(Song s: songs) {
+				str += s.toString();
+			}
 		}
-		return copySongs;
+		return str;
 	}
-
-	public String getName() {
-	    return playlistName;
+	
+	public String getAllAlbums() {
+		String str = "";
+		if (albums.isEmpty()) {
+			return "Currently No Albums\n";
+		} else {
+			for(Album a: albums) {
+				str += a.toString();
+			}
+		}
+		return str;
 	}
+	
 }

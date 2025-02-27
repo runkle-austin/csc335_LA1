@@ -1,8 +1,12 @@
 package view;
 
+import model.Album;
 import model.MusicStore;
+import model.Song;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MusicApp {
@@ -45,12 +49,13 @@ public class MusicApp {
                 case "4":
                     searchAlbumByArtist();
                     break;
-                case "5":
+                /*case "5":
                     listAllAlbums();
                     break;
                 case "6":
                     listAllSongs();
                     break;
+                   */
                 case "7":
                     System.out.println("Goodbye! 🎶");
                     return; // Exit program
@@ -100,16 +105,32 @@ public class MusicApp {
         }
     }
 
- 
+ /*
     private void listAllAlbums() {
-        System.out.print(musicStore.getAllAlbums());
+        List<Album> albums = musicStore.getAllAlbums();
+        if (albums.isEmpty()) {
+            System.out.println("No albums available.");
+        } else {
+            System.out.println("\n📀 All Albums:");
+            for (Album album : albums) {
+                System.out.println(album.getTitle() + " by " + album.getArtist());
+            }
+        }
     }
  
 
     private void listAllSongs() {
-        System.out.print(musicStore.getSongs());
+        List<Song> songs = musicStore.getSongs();
+        if (songs.isEmpty()) {
+            System.out.println("No songs available.");
+        } else {
+            System.out.println("\n🎶 All Songs:");
+            for (Song song : songs) {
+                System.out.println(song.getTitle() + " by " + song.getArtist());
+            }
+        }
     }
-
+*/
     public static void main(String[] args) {
         MusicApp view = new MusicApp();
         view.start();
