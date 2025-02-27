@@ -45,66 +45,41 @@ public class LibraryModel {
 		songs.add(s);
 		return songName + " was added to Library";
 	}
-	/*
-	public void addAlbumToLibrary(Album album) {
-		if (!albums.contains(album)) {
-			albums.add(album);
-			for (Song song : album.getSongs()) {
-				addSongToLibrary(song);
-			}
-		}
-	}
 
-	public ArrayList<Song> getSongs() {
-		return new ArrayList<>(songs);
+	public String getSongsByArtist(String artist) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	public ArrayList<Album> getAlbums() {
-		return new ArrayList<>(albums);
+	public String getAlbumsByTitle(String title) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	public String rateSong(Song song, int rating) {
-		if (rating < 1 || rating > 5) {
-			return "Invalid rating. Try again.";
-		}
-		song.setRating(rating);
-		if (rating == 5) {
-			markSongAsFavorite(song);
-		}
-		return "Song was rated " + rating;
+	public String getAlbumsByArtist(String artist) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	public void markSongAsFavorite(Song song) {
-		if (!favoriteSongs.contains(song)) {
-			favoriteSongs.add(song);
-			System.out.println(song.getTitle() + " has been added to favorites.");
-		}
+	public String getPlaylistByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
 	public void createPlaylist(String name) {
-		if (!playlists.containsKey(name)) {
-			playlists.put(name, new Playlist(name));
-		}
+		// TODO Auto-generated method stub
+		
 	}
-
-	public void addSongToPlaylist(String playlistName, Song song) {
-		if (playlists.containsKey(playlistName)) {
-			playlists.get(playlistName).addSong(song);
-		}
+	public void addSongToPlaylist(String playlistName, String songTitle) {
+		// TODO Auto-generated method stub
+		
 	}
-
-	public void removeSongFromPlaylist(String playlistName, Song song) {
-		if (playlists.containsKey(playlistName)) {
-			playlists.get(playlistName).removeSong(song);
-		}
+	public void addAlbumToPlaylist(String playlistName, String albumTitle) {
+		// TODO Auto-generated method stub
+		
 	}
-
-	public Playlist getPlaylist(String name) {
-		return playlists.get(name);
+	public void removeSongFromPlaylist(String playlistName, String songTitle) {
+		// TODO Auto-generated method stub
+		
 	}
-
-	public ArrayList<Song> getFavoriteSongs() {
-		return new ArrayList<>(favoriteSongs);
+	public String getSongsByTitle(String title) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	*/
 }
