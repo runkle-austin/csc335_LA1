@@ -14,8 +14,6 @@ public class Song {
 		this.artist = artist;
 		this.rating = null;
 		this.album = album;
-
-		// this.album = Album
 	}
 	/* we don't want setters because a song's variables 
 	   don't change (other then rating) */
@@ -49,5 +47,15 @@ public class Song {
 	
 	public String toString() {
 		return title + " by " + artist + " from album: " + album + "\n";
+	}
+	
+	public boolean equals(Song s) {
+		if	(this.title.equals(s.getTitle()) &&
+			this.artist.equals(s.getArtist()) &&
+			this.album.equals(s.getAlbum()) ) 
+		{
+			return true;
+		}
+		return false;
 	}
 }

@@ -65,8 +65,8 @@ public class MusicStore {
 		return artist;
 	}
 	
-	// returns a deep copy of the songs by artist if artist is found, 
-	// otherwise returns empty arrayList
+	// returns a string of songs by artist if artist is found, 
+	// otherwise returns empty string
 	public String getSongsByArtist(String artist) {
 		ArrayList<Song> songs = new ArrayList<Song>();
 		for (Song s: songList) {
@@ -120,5 +120,15 @@ public class MusicStore {
 			}
 		}
 		return str;
+	}
+	
+	// returns copy of song from title and artist if found, otherwise return null
+	public Song getSongByTitleArtist(String title, String artist) {
+		for(Song s: songList) {
+			if(s.getTitle().equals(title) && (s.getArtist().equals(artist))) {
+				return s.createCopy();
+			}
+		}
+		return null;
 	}
 }

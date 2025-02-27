@@ -46,6 +46,19 @@ class testSong {
 		assertEquals(s.getTitle(), copy.getTitle());
 	}
 	
+	@Test
+	void testEquals() {
+		Song s1 = new Song("Sticks", "Mother Mother", "Sticks");
+		Song s2 = new Song("Verbatim", "Mother Mother", "Touch Up");
+		// tests if they are NOT the same object
+		Song copy = s1.createCopy();
+		assertNotEquals(s1, copy);
+		// tests if each instance variable is same
+		assertTrue(s1.equals(copy));
+		// tests if songs are not equal
+		assertFalse(s2.equals(s1));
+	}
+	
 	//several tests for rating
 		@Test
 		void testRatingFiveSong() {
