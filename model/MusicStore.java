@@ -1,4 +1,4 @@
-package model;
+package model; 
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,22 +65,6 @@ public class MusicStore {
 		return artist;
 	}
 	
-	// returns a string of songs by artist if artist is found, 
-	// otherwise returns empty string
-	public String getSongsByArtist(String artist) {
-		ArrayList<Song> songs = new ArrayList<Song>();
-		for (Song s: songList) {
-			if (s.getArtist().equals(artist)) {
-				songs.add(s);
-			}
-		}
-		String str = "";
-		for (Song s: songs) {
-			str += s.toString();
-		}
-		return str;
-	}
-	
 	// searches through artists until finding artist with desired name
 	// adds all albums by artist to return String
 	public String getAlbumsByArtist(String artist) {
@@ -95,6 +79,18 @@ public class MusicStore {
 			str += a.toString();
 		}
 		return str;
+	}
+	
+	// this method returns a single album by searching for it with both the name and artist
+	public Album getAlbumByTitleAndArtist(String title, String artist) {
+		for (Album a: albumList) {
+			if (a.getTitle().equals(title) && a.getArtist().equals(artist)) {
+				// if the album does exist return it
+				return a;
+			}
+		}
+		// if the album does not exist return null
+		return null;
 	}
 
 	
@@ -130,5 +126,21 @@ public class MusicStore {
 			}
 		}
 		return null;
+	}
+	
+	// returns a string of songs by artist if artist is found, 
+	// otherwise returns empty string
+	public String getSongsByArtist(String artist) {
+		ArrayList<Song> songs = new ArrayList<Song>();
+		for (Song s: songList) {
+			if (s.getArtist().equals(artist)) {
+				songs.add(s);
+			}
+		}
+		String str = "";
+		for (Song s: songs) {
+			str += s.toString();
+		}
+		return str;
 	}
 }

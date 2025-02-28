@@ -2,25 +2,28 @@ package model;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class LibraryModel {
 	private MusicStore musicStore;
 	private ArrayList<Song> songs;
 	private ArrayList<Album> albums;
-	private HashMap<String, Playlist> playlists;
+	private ArrayList<Playlist> playlists;
 	private ArrayList<Song> favoriteSongs;
 
 	public LibraryModel() throws FileNotFoundException {
 		musicStore = new MusicStore();
 		songs = new ArrayList<>();
 		albums = new ArrayList<>();
-		playlists = new HashMap<>(); 
+		playlists = new ArrayList<>(); 
 		favoriteSongs = new ArrayList<>();
 	}
 	// finds song from songName and artistName in music store and creates copy
 	// if song doesn't exist, song = null
 	public Song createSong(String songName, String artistName) {
+		if (songName == null || artistName == null || songName.isEmpty() || artistName.isEmpty()) {
+			return null;
+		}
+		
 		return musicStore.getSongByTitleArtist(songName, artistName);
 	}
 
@@ -45,66 +48,152 @@ public class LibraryModel {
 		songs.add(s);
 		return songName + " was added to Library";
 	}
-	/*
-	public void addAlbumToLibrary(Album album) {
-		if (!albums.contains(album)) {
-			albums.add(album);
-			for (Song song : album.getSongs()) {
-				addSongToLibrary(song);
+
+	// this method gets all of the songs in the library by artist
+	public String getSongsByArtist(String artist) {
+		String result = "Songs by " + artist + "\n";
+		
+		// loop through all the songs in the library
+		for (Song song: songs) {
+			if (song.getArtist().equals(artist)) {
+			result += song.toString();
 			}
 		}
-	}
-
-	public ArrayList<Song> getSongs() {
-		return new ArrayList<>(songs);
-	}
-
-	public ArrayList<Album> getAlbums() {
-		return new ArrayList<>(albums);
-	}
-
-	public String rateSong(Song song, int rating) {
-		if (rating < 1 || rating > 5) {
-			return "Invalid rating. Try again.";
-		}
-		song.setRating(rating);
-		if (rating == 5) {
-			markSongAsFavorite(song);
-		}
-		return "Song was rated " + rating;
-	}
-
-	public void markSongAsFavorite(Song song) {
-		if (!favoriteSongs.contains(song)) {
-			favoriteSongs.add(song);
-			System.out.println(song.getTitle() + " has been added to favorites.");
+		
+		if (result.equals("")) {
+			return "No songs by " + artist; 
+		} else {
+			return result;
 		}
 	}
-
+	
+	// this method gets all of the songs in the library by title
+	public String getSongsByTitle(String title) {
+		String result = "Songs named" + title + "\n";
+		
+		// loop through all the songs in the library
+		for (Song song: songs) {
+			if (song.getTitle().equals(title));
+			result += song.toString();
+		}
+		
+		if (result.equals("")) {
+			return "No songs with title " + title; 
+		} else {
+			return result;
+		}
+	}
+	
+	public String getAlbumsByTitle(String title) {
+		String result = "Albums named" + title + "\n";
+		
+		// loop through all the albums in the library
+		for (Album album: albums) {
+			if (album.getTitle().equals(title));
+			result += album.toString();
+		}
+		
+		if (result.equals("")) {
+			return "No albums with title " + title; 
+		} else {
+			return result;
+		}
+	}
+	
+	public String getAlbumsByArtist(String artist) {
+		String result = "Albums by " + artist + "\n";
+		
+		// loop through all the albums in the library
+		for (Album album: albums) {
+			if (album.getArtist().equals(artist));
+			result += album.toString();
+		}
+		
+		if (result.equals("")) {
+			return "No songs with title " + artist; 
+		} else {
+			return result;
+		}
+	}
+	
+	// this method creates a new playlist and adds it to the arraylist of playlists
 	public void createPlaylist(String name) {
-		if (!playlists.containsKey(name)) {
-			playlists.put(name, new Playlist(name));
+		playlists.add(new Playlist(name));
+	}
+	
+	// this method adds a song to a specific playlist in the playlist arraylist
+	public String addSongToPlaylist(String playlistName, String songTitle, String artist) {
+		for (Playlist p: playlists) {
+			if (p.getName().equals(playlistName)) {
+				Song song = createSong(songTitle, artist);
+				if (song == null) {
+					return "Song was not found in music store";
+				}
+				p.addSong(song);
+				return songTitle + " has been added to playlist" + playlistName + "\n";
+			}
 		}
+		// if the playlist does not exist
+		return playlistName + " has not been created " + "\n"; 
+		
 	}
-
-	public void addSongToPlaylist(String playlistName, Song song) {
-		if (playlists.containsKey(playlistName)) {
-			playlists.get(playlistName).addSong(song);
+	
+	public String addAlbumToPlaylist(String playlistName, String albumTitle, String artist) {
+		for (Playlist p: playlists) {
+			if (p.getName().equals(playlistName)) {
+				Album album = musicStore.getAlbumByTitleAndArtist(albumTitle, artist);
+				if (album.equals(null)) {
+					return "Album was not found in music store";
+				}
+				p.addAlbum(albumTitle);
+				return albumTitle + " has been added to playlist" + playlistName + "\n";
+			}
 		}
+		// if the playlist does not exist
+		return playlistName + " has not been created " + "\n"; 
 	}
-
-	public void removeSongFromPlaylist(String playlistName, Song song) {
-		if (playlists.containsKey(playlistName)) {
-			playlists.get(playlistName).removeSong(song);
+	
+	public String getPlaylistByName(String name) {
+		for (Playlist p : playlists) {
+			if (p.getName().equals(name)) {
+				return p.toString();
+			}
 		}
+		// if the playlist does not exist
+		return name + " has not been created " + "\n"; 
 	}
+	
+	public String removeSongFromPlaylist(String playlistName, String songTitle) {
+		// loop through the playlists
+		for (Playlist p: playlists) {
+			// if the playlist is found remove the song from the playlist
+			if (p.getName().equals(playlistName)) {
+				p.removeSong(songTitle);
+				return songTitle + " has been removed from playlist" + playlistName;
+			}
+		}
+		
+		// if the playlist does not exist
+		return playlistName + " does nto exist " + "\n"; 
+	}
+	
+	public String rateSong(String song, String artist, int rating) {
+		// find the song
+		for (Song s: songs) {
+			if (s.getTitle().equals(song) && s.getArtist().equals(artist)) {
+				//rate the song and tell the user it has been rated
+				s.setRating(rating);
+				//add the song to the list of favorite songs
+				if (rating == 5) {
+					favoriteSongs.add(s);
+				}
+				return song + "has been rated\n";
+			}
+		}
+		
+		// if the song was not found dont rate it
+		return "Song was not found";
+	}
+	
 
-	public Playlist getPlaylist(String name) {
-		return playlists.get(name);
-	}
-
-	public ArrayList<Song> getFavoriteSongs() {
-		return new ArrayList<>(favoriteSongs);
-	}
-	*/
 }
