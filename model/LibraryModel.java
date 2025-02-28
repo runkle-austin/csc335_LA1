@@ -20,6 +20,10 @@ public class LibraryModel {
 	// finds song from songName and artistName in music store and creates copy
 	// if song doesn't exist, song = null
 	public Song createSong(String songName, String artistName) {
+		if (songName == null || artistName == null || songName.isEmpty() || artistName.isEmpty()) {
+			return null;
+		}
+		
 		return musicStore.getSongByTitleArtist(songName, artistName);
 	}
 
@@ -51,8 +55,9 @@ public class LibraryModel {
 		
 		// loop through all the songs in the library
 		for (Song song: songs) {
-			if (song.getArtist().equals(artist));
+			if (song.getArtist().equals(artist)) {
 			result += song.toString();
+			}
 		}
 		
 		if (result.equals("")) {
@@ -121,7 +126,7 @@ public class LibraryModel {
 		for (Playlist p: playlists) {
 			if (p.getName().equals(playlistName)) {
 				Song song = createSong(songTitle, artist);
-				if (song.equals(null)) {
+				if (song == null) {
 					return "Song was not found in music store";
 				}
 				p.addSong(song);
