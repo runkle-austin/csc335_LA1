@@ -1,10 +1,7 @@
 package view;
 
-import model.Album;
 import model.MusicStore;
-import model.Song;
 import model.LibraryModel;
-import model.Playlist;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -25,8 +22,10 @@ public class MusicApp {
         scanner = new Scanner(System.in);
     }
 
+    // this method takes in user input and prefrms the requested tasks
     public void start() {
         while (true) {
+        	// display options
             System.out.println("\n🎵 Welcome to the Music Store 🎵");
             System.out.println("1. Search for a song by title (Store)");
             System.out.println("2. Search for a song by artist (Store)");
@@ -42,11 +41,14 @@ public class MusicApp {
             System.out.println("12. Add an album to a playlist");
             System.out.println("13. Remove a song from a playlist");
             System.out.println("14. Add a song to the library");
-            System.out.println("15. Exit");
+            System.out.println("15. Rate a song");
+            System.out.println("16. Exit");
             System.out.print("Enter your choice: ");
 
+            // get the users choice
             String choice = scanner.nextLine();
             switch (choice) {
+            	//perform the users choice
                 case "1": searchSongByTitleStore(); break;
                 case "2": searchSongByArtistStore(); break;
                 case "3": searchAlbumByTitleStore(); break;
@@ -61,7 +63,8 @@ public class MusicApp {
                 case "12": addAlbumToPlaylist(); break;
                 case "13": removeSongFromPlaylist(); break;
                 case "14": songToLibrary(); break;
-                case "15":
+                case "15": rateSong(); break;
+                case "16":
                     System.out.println("Goodbye! 🎶");
                     return;
                 default:
@@ -145,12 +148,11 @@ public class MusicApp {
         String playlistName = scanner.nextLine();
         System.out.print("Enter song title: ");
         String songTitle = scanner.nextLine();
-        
-        System.out.print("Enter artist title: ");
-        String artitTitle = scanner.nextLine();
-        
-        Song s = libraryModel.createSong(songTitle, playlistName);
-        libraryModel.addSongToPlaylist(playlistName, songTitle);
+        System.out.print("Enter artist name: ");
+        String artistName = scanner.nextLine();
+
+        String result = libraryModel.addSongToPlaylist(playlistName, songTitle, artistName);
+        System.out.println(result);
     }
 
     private void addAlbumToPlaylist() {
@@ -158,7 +160,11 @@ public class MusicApp {
         String playlistName = scanner.nextLine();
         System.out.print("Enter album title: ");
         String albumTitle = scanner.nextLine();
-        libraryModel.addAlbumToPlaylist(playlistName, albumTitle);
+        System.out.print("Enter artist name: ");
+        String artistName = scanner.nextLine();
+
+        String result = libraryModel.addAlbumToPlaylist(playlistName, albumTitle, artistName);
+        System.out.println(result);
     }
 
     private void removeSongFromPlaylist() {
@@ -166,21 +172,48 @@ public class MusicApp {
         String playlistName = scanner.nextLine();
         System.out.print("Enter song title: ");
         String songTitle = scanner.nextLine();
-        libraryModel.removeSongFromPlaylist(playlistName, songTitle);
+        String result = libraryModel.removeSongFromPlaylist(playlistName, songTitle);
+        System.out.println(result);
     }
-    
+
     private void songToLibrary() {
         System.out.print("Enter song title: ");
         String songTitle = scanner.nextLine();
         System.out.print("Enter artist name: ");
         String artistName = scanner.nextLine();
-        System.out.print(libraryModel.addSongToLibrary(songTitle,artistName));
+        String result = libraryModel.addSongToLibrary(songTitle, artistName);
+        System.out.println(result);
     }
+    
+    private void rateSong() {
+        System.out.print("Enter song title: ");
+        String songTitle = scanner.nextLine();
+        System.out.print("Enter artist name: ");
+        String artistName = scanner.nextLine();
+        
+        int rating;
+        while (true) {
+            System.out.print("Enter rating (1-5): ");
+            try {
+                rating = Integer.parseInt(scanner.nextLine());
+                if (rating < 1 || rating > 5) {
+                    System.out.println("Invalid rating. Please enter a number between 1 and 5.");
+                } else {
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number between 1 and 5.");
+            }
+        }
+        
+        String result = libraryModel.rateSong(songTitle, artistName, rating);
+        System.out.println(result);
+    }
+
 
     public static void main(String[] args) {
         MusicApp view = new MusicApp();
         view.start();
     }
 }
-
 
