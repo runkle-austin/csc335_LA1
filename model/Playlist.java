@@ -20,14 +20,16 @@ public class Playlist {
 
 	// adds song if not already in playlist
 	public void addSong(Song song) {
-	    if (songs.contains(song) == false) {
+		// check if song already in playlist	
+		boolean inPlaylist = false;
+		for (Song s: songs) {
+			if (s.equals(song)) {
+				inPlaylist = true;
+			}
+		}
+	    if (inPlaylist == false) {
 	        songs.add(song);
 	    }
-	}
-
-	// adds album if not already in playlist
-	public void addAlbum(String albumTitle) {
-		
 	}
 	
 	public String removeSong(String title) {

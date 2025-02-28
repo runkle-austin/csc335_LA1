@@ -21,6 +21,9 @@ public class LibraryModel {
 	// finds song from songName and artistName in music store and creates copy
 	// if song doesn't exist, song = null
 	public Song createSong(String songName, String artistName) {
+		if (songName == null || artistName == null || songName.isEmpty() || artistName.isEmpty()) {
+			return null;
+		}
 		return musicStore.getSongByTitleArtist(songName, artistName);
 	}
 
@@ -32,6 +35,19 @@ public class LibraryModel {
 			}
 		}
 		return false;
+	}
+	
+	public String addAlbumToLibrary(String albumName, String artist) {
+
+		for (Album a: albums) {
+			if (a.getTitle().equals(albumName) && a.getArtist().equals(artist)) {
+				return "Album already in library";
+			}
+		}
+		
+		albums.add(musicStore.getAlbumByTitleAndArtist(albumName, artist));
+		
+		return albumName + " successfully added\n";
 	}
 	
 	public String addSongToLibrary(String songName, String artist) {
@@ -120,29 +136,63 @@ public class LibraryModel {
 	
 	// this method adds a song to a specific playlist in the playlist arraylist
 	public String addSongToPlaylist(String playlistName, String songTitle, String artist) {
+		boolean songFound = false;
 		for (Playlist p: playlists) {
 			if (p.getName().equals(playlistName)) {
 				Song song = createSong(songTitle, artist);
-				if (song == null) {
-					return "Song was not found in music store";
+				
+				//check if song is in playlist
+				if (p.getSongs().contains(songTitle) && p.getSongs().contains(artist)) {
+					return "Song already in playlist";
 				}
+				
+				//check if song is in the music library				
+				for (Song s: songs) {
+					if (s.getTitle().equals(songTitle) && s.getArtist().equals(artist)) {
+						songFound = true;
+					}
+				}
+				
+				if (!songFound) {
+					return "Song is not in library";
+				}
+				
 				p.addSong(song);
 				return songTitle + " has been added to playlist" + playlistName + "\n";
 			}
 		}
 		// if the playlist does not exist
 		return playlistName + " has not been created " + "\n"; 
-		
 	}
 	
 	public String addAlbumToPlaylist(String playlistName, String albumTitle, String artist) {
+		boolean foundAlbum = false;
 		for (Playlist p: playlists) {
 			if (p.getName().equals(playlistName)) {
 				Album album = musicStore.getAlbumByTitleAndArtist(albumTitle, artist);
+				
+				//check if album is in album list
+				for (Album a: albums) {
+					if (a.getArtist().equals(artist) && a.getTitle().equals(albumTitle)) {
+						foundAlbum = true;
+					}
+				}
+				
+				if (foundAlbum == false) {
+					return "Album not in library";
+				}
+				
 				if (album == null) {
 					return "Album was not found in music store";
 				}
-				p.addAlbum(albumTitle);
+				
+				// add each song in the album to the playlist
+				ArrayList<Song> albumSongs = album.getSongs();
+				
+				for (Song s: albumSongs) {
+					p.addSong(s);
+				}
+				
 				return albumTitle + " has been added to playlist" + playlistName + "\n";
 			}
 		}
@@ -174,12 +224,12 @@ public class LibraryModel {
 		return playlistName + " does nto exist " + "\n"; 
 	}
 	
-	// list all songs by title from library
+	// list all songs by title
 	public String allSongs() {
 		String str = "";
 		//search through all of the songs in library
 		for (Song s: songs) {
-			str += s.getTitle() + "\n";
+			str += s.toString() + "\n";
 		}
 		if (str.equals("")) {
 			return "No songs in library\n";
@@ -251,8 +301,11 @@ public class LibraryModel {
 				}
 				return song + "has been rated\n";
 			}
-		}	
+		}
+		
 		// if the song was not found dont rate it
 		return "Song was not found";
 	}
+	
+
 }

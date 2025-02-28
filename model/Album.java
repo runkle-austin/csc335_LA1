@@ -19,6 +19,7 @@ public class Album {
 		this.year = year;
 	}
 	
+	// Methods
 	public String getTitle() {
 		return title;
 	}

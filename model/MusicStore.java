@@ -9,6 +9,7 @@ public class MusicStore {
 	
 	private ArrayList<Album> albumList = new ArrayList<Album>();
 	private ArrayList<Song> songList = new ArrayList<Song>();
+	private ArrayList<Artist> artists = new ArrayList<Artist>();
 	
 	// reads the album file, calling process file on each line
 	// creates MusicStore object
@@ -25,7 +26,7 @@ public class MusicStore {
 			line = "albums/" + line;
 			
 			
-			processAlbum(line);
+			artists.add(processAlbum(line));
 		}
 		
 		scanner.close();
@@ -33,7 +34,7 @@ public class MusicStore {
 	}
 	
 	// creates album, songs, and artist objects
-	private void processAlbum(String line) throws FileNotFoundException {
+	private Artist processAlbum(String line) throws FileNotFoundException {
 		File fr = new File(line);
 		Scanner scanner = new Scanner(fr);
 		
@@ -59,7 +60,9 @@ public class MusicStore {
 		albumList.add(album);
 		artist.addAlbum(album);
 		
+		
 		scanner.close();
+		return artist;
 	}
 	
 	// searches through artists until finding artist with desired name
