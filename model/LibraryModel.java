@@ -170,21 +170,16 @@ public class LibraryModel {
 		for (Playlist p: playlists) {
 			if (p.getName().equals(playlistName)) {
 				Album album = musicStore.getAlbumByTitleAndArtist(albumTitle, artist);
-				
+				if (album == null) {
+					return "Album was not found in music store";
+				}
 				//check if album is in album list
 				for (Album a: albums) {
 					if (a.getArtist().equals(artist) && a.getTitle().equals(albumTitle)) {
 						foundAlbum = true;
 					}
 				}
-				
-				if (foundAlbum == false) {
-					return "Album not in library";
-				}
-				
-				if (album == null) {
-					return "Album was not found in music store";
-				}
+				if (foundAlbum == false) {return "Album not in library";}
 				
 				// add each song in the album to the playlist
 				ArrayList<Song> albumSongs = album.getSongs();
@@ -192,6 +187,7 @@ public class LibraryModel {
 				for (Song s: albumSongs) {
 					p.addSong(s);
 				}
+				
 				
 				return albumTitle + " has been added to playlist" + playlistName + "\n";
 			}

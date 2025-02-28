@@ -6,12 +6,12 @@ public class Playlist {
 
 	private String playlistName;
 	private ArrayList<Song> songs;
-	private ArrayList<Album> albums;
+	private ArrayList<String> albums;
 
 	public Playlist(String name) {
 	    this.playlistName = name;
 	    this.songs = new ArrayList<Song>();
-	    this.albums = new ArrayList<Album>();
+	    this.albums = new ArrayList<String>();
 	}
 	
 	public String getName() {
@@ -59,8 +59,8 @@ public class Playlist {
 		if (albums.isEmpty()) {
 			return "Currently No Albums\n";
 		} else {
-			for(Album a: albums) {
-				str += a.toString();
+			for(String a: albums) {
+				str += a + "\n";
 			}
 		}
 		return str;
