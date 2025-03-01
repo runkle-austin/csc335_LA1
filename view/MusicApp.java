@@ -186,7 +186,9 @@ public class MusicApp {
         String playlistName = scanner.nextLine();
         System.out.print("Enter song title: ");
         String songTitle = scanner.nextLine();
-        String result = libraryModel.removeSongFromPlaylist(playlistName, songTitle);
+        System.out.print("Ender song artist: ");
+        String songArtist = scanner.nextLine();
+        String result = libraryModel.removeSongFromPlaylist(playlistName, songTitle, songArtist);
         System.out.println(result);
     }
 
@@ -259,4 +261,3 @@ public class MusicApp {
         view.start();
     }
 }
-

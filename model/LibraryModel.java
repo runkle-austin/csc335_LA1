@@ -44,9 +44,11 @@ public class LibraryModel {
 				return "Album already in library";
 			}
 		}
-		
-		albums.add(musicStore.getAlbumByTitleAndArtist(albumName, artist));
-		
+		Album a = musicStore.getAlbumByTitleAndArtist(albumName, artist);
+		albums.add(a);
+		for(Song s: a.getSongs()) {
+			songs.add(s);
+		}
 		return albumName + " successfully added\n";
 	}
 	
@@ -64,36 +66,37 @@ public class LibraryModel {
 
 	// this method gets all of the songs in the library by artist
 	public String getSongsByArtist(String artist) {
-		String result = "Songs by " + artist + "\n";
+		String result = "";
 		
 		// loop through all the songs in the library
 		for (Song song: songs) {
 			if (song.getArtist().equals(artist)) {
-			result += song.toString();
+			result += song.getTitle() + " from album: " + song.getAlbum()+ "\n";
 			}
 		}
 		
 		if (result.equals("")) {
 			return "No songs by " + artist; 
 		} else {
-			return result;
+			return "Songs by " + artist + "\n" + result;
 		}
 	}
 	
 	// this method gets all of the songs in the library by title
 	public String getSongsByTitle(String title) {
-		String result = "Songs named" + title + "\n";
+		String result = "";
 		
 		// loop through all the songs in the library
 		for (Song song: songs) {
-			if (song.getTitle().equals(title));
-			result += song.toString();
+			if (song.getTitle().equals(title)) {
+				result += song.toString();
+			}
 		}
 		
 		if (result.equals("")) {
 			return "No songs with title " + title; 
 		} else {
-			return result;
+			return "Songs named " + title + "\n" + result;
 		}
 	}
 	
@@ -102,8 +105,9 @@ public class LibraryModel {
 		
 		// loop through all the albums in the library
 		for (Album album: albums) {
-			if (album.getTitle().equals(title));
-			result += album.toString();
+			if (album.getTitle().equals(title)) {
+				result += album.toString();
+			}
 		}
 		
 		if (result.equals("")) {
@@ -118,12 +122,13 @@ public class LibraryModel {
 		
 		// loop through all the albums in the library
 		for (Album album: albums) {
-			if (album.getArtist().equals(artist));
-			result += album.toString();
+			if (album.getArtist().equals(artist)) {
+				result += album.toString();
+			}
 		}
 		
 		if (result.equals("")) {
-			return "No songs with title " + artist; 
+			return "No albums by " + artist; 
 		} else {
 			return "Albums by " + artist + "\n" + result;
 		}
@@ -193,7 +198,7 @@ public class LibraryModel {
 			}
 		}
 		// if the playlist does not exist
-		return playlistName + " has not been created " + "\n"; 
+		return playlistName + " has not been created\n"; 
 	}
 	
 	public String getPlaylistByName(String name) {
@@ -203,21 +208,21 @@ public class LibraryModel {
 			}
 		}
 		// if the playlist does not exist
-		return name + " has not been created " + "\n"; 
+		return name + " has not been created\n"; 
 	}
 	
-	public String removeSongFromPlaylist(String playlistName, String songTitle) {
+	public String removeSongFromPlaylist(String playlistName, String songTitle, String artist) {
 		// loop through the playlists
 		for (Playlist p: playlists) {
 			// if the playlist is found remove the song from the playlist
 			if (p.getName().equals(playlistName)) {
-				p.removeSong(songTitle);
-				return songTitle + " has been removed from playlist" + playlistName;
+				p.removeSong(songTitle, artist);
+				return songTitle + " has been removed from: " + playlistName + "\n";
 			}
 		}
 		
 		// if the playlist does not exist
-		return playlistName + " does nto exist " + "\n"; 
+		return playlistName + " does not exist\n"; 
 	}
 	
 	// list all songs by title
@@ -225,7 +230,7 @@ public class LibraryModel {
 		String str = "";
 		//search through all of the songs in library
 		for (Song s: songs) {
-			str += s.toString() + "\n";
+			str += s.toString();
 		}
 		if (str.equals("")) {
 			return "No songs in library\n";
@@ -276,13 +281,13 @@ public class LibraryModel {
 	public String favoriteSongs() {
 		String str = "";
 		//search through all of the songs in library
-		for (Song p: favoriteSongs) {
-			str += p.toString() + "\n";
+		for (Song s: favoriteSongs) {
+			str += s.toString();
 		}
 		if (str.equals("")) {
-			return "No playlists in library\n";
+			return "No favorites in library\n";
 		}
-		return "Here is a list of all playlists in your library\n" + str;
+		return "Here is a list of all favorites in your library\n" + str;
 	}
 	
 	public String rateSong(String song, String artist, int rating) {

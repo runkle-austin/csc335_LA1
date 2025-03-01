@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 
+import model.Album;
 import model.MusicStore;
 
 class testMusicStore {
@@ -62,6 +63,25 @@ class testMusicStore {
 		String str = "Begin Again by Norah Jones from album: Begin Again\n";
 		String returnStr = musicStore.getSongsByTitle("Begin Again");
 		assertEquals(returnStr, str);
+	}
+	
+	@Test
+	void testGetAlbumByTitleAndArtist() throws FileNotFoundException {
+		MusicStore musicStore = new MusicStore();
+		String str = "Begin Again by Norah Jones, 2018, Pop\n"
+				+ "Songs:\n"
+				+ "My Heart Is Full\n"
+				+ "Begin Again\n"
+				+ "It Was You\n"
+				+ "A Song with No Name\n"
+				+ "Uh Oh\n"
+				+ "Wintertime\n"
+				+ "Just a Little Bit\n";
+		Album a1 = musicStore.getAlbumByTitleAndArtist("Begin Again", "Norah Jones");
+		String returnStr = a1.toString();
+		assertEquals(returnStr, str);
+		Album a2 = musicStore.getAlbumByTitleAndArtist("Be", "Norah Jones");
+		assertEquals(a2,null);
 	}
 
 }

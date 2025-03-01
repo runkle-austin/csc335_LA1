@@ -2,11 +2,14 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
 import model.Album;
+import model.LibraryModel;
+import model.MusicStore;
 import model.Playlist;
 import model.Song;
 
@@ -37,7 +40,7 @@ class testPlaylist {
 		Song s = new Song("Big Sur", "Jack Johnson", "All The Light Above It Too");
 		playlist.addSong(s);
 		playlist.addSong(s);
-		String str = playlist.removeSong("Big Sur");
+		String str = playlist.removeSong("Big Sur", "Jack Johnson");
 		
 		assertEquals(str, "Big Sur was removed\n");
 	}
@@ -46,19 +49,11 @@ class testPlaylist {
 	void testNotFoundRemove() {
 		Playlist playlist = new Playlist("test");
 		
-		String str = playlist.removeSong("Big Sur");
+		String str = playlist.removeSong("Big Sur", "Jack Johnson");
 		
 		assertEquals(str, "Big Sur was not found\n");
 	}
-	/*
-	@Test 
-	void testGetAllAlbums() {
-		Playlist playlist = new Playlist("test");
-		ArrayList<Song> songs = new ArrayList<Song>();
-		Album a = new Album("Sticks", "Mother Mother", songs, "alt", 2017);
-		playlist.addAlbum(null);
-	}
-	*/
+	
 	
 
 }

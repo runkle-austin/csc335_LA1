@@ -32,9 +32,9 @@ public class Playlist {
 	    }
 	}
 	
-	public String removeSong(String title) {
+	public String removeSong(String title, String artist) {
 	    for(Song s: songs) {
-	    	if(s.getTitle().equals(title)) {
+	    	if(s.getTitle().equals(title) && s.getArtist().equals(artist)) {
 	    		songs.remove(s);
 	    		return title + " was removed\n";
 	    	}
@@ -53,17 +53,4 @@ public class Playlist {
 		}
 		return str;
 	}
-	
-	public String getAllAlbums() {
-		String str = "";
-		if (albums.isEmpty()) {
-			return "Currently No Albums\n";
-		} else {
-			for(String a: albums) {
-				str += a + "\n";
-			}
-		}
-		return str;
-	}
-	
 }
