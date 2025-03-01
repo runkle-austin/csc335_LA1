@@ -1,4 +1,4 @@
-package view;
+package view; 
 
 import model.MusicStore;
 import model.LibraryModel;
@@ -27,22 +27,30 @@ public class MusicApp {
         while (true) {
         	// display options
             System.out.println("\n🎵 Welcome to the Music Store 🎵");
-            System.out.println("1. Search for a song by title (Store)");
-            System.out.println("2. Search for a song by artist (Store)");
-            System.out.println("3. Search for an album by title (Store)");
-            System.out.println("4. Search for an album by artist (Store)");
-            System.out.println("5. Search for a song by title (Library)");
-            System.out.println("6. Search for a song by artist (Library)");
-            System.out.println("7. Search for an album by title (Library)");
-            System.out.println("8. Search for an album by artist (Library)");
+            System.out.println("==== Search By Store =====");
+            System.out.println("1. Search for a song by title");
+            System.out.println("2. Search for a song by artist");
+            System.out.println("3. Search for an album by title");
+            System.out.println("4. Search for an album by artist");
+            System.out.println("==== Search By Library =====");
+            System.out.println("5. Search for a song by title");
+            System.out.println("6. Search for a song by artist");
+            System.out.println("7. Search for an album by title");
+            System.out.println("8. Search for an album by artist");
             System.out.println("9. Search for a playlist by name");
             System.out.println("10. Create a playlist");
             System.out.println("11. Add a song to a playlist");
             System.out.println("12. Add an album to a playlist");
             System.out.println("13. Remove a song from a playlist");
             System.out.println("14. Add a song to the library");
-            System.out.println("15. Rate a song");
-            System.out.println("16. Exit");
+            System.out.println("15. Add album to library");
+            System.out.println("16. List all songs");
+            System.out.println("17. List all artists");
+            System.out.println("18. List all albums");
+            System.out.println("19. List all playlists");
+            System.out.println("20. List all favorites");
+            System.out.println("21. Rate a song");
+            System.out.println("22. Exit");
             System.out.print("Enter your choice: ");
 
             // get the users choice
@@ -63,8 +71,14 @@ public class MusicApp {
                 case "12": addAlbumToPlaylist(); break;
                 case "13": removeSongFromPlaylist(); break;
                 case "14": songToLibrary(); break;
-                case "15": rateSong(); break;
-                case "16":
+                case "15": albumToLibrary(); break;
+                case "16": listAllSongs(); break;
+                case "17": listAllArtists(); break;
+                case "18": listAllAlbums(); break;
+                case "19": listAllPlaylists(); break;
+                case "20": listAllFavorites(); break;
+                case "21": rateSong(); break;
+                case "22":
                     System.out.println("Goodbye! 🎶");
                     return;
                 default:
@@ -172,7 +186,9 @@ public class MusicApp {
         String playlistName = scanner.nextLine();
         System.out.print("Enter song title: ");
         String songTitle = scanner.nextLine();
-        String result = libraryModel.removeSongFromPlaylist(playlistName, songTitle);
+        System.out.print("Ender song artist: ");
+        String songArtist = scanner.nextLine();
+        String result = libraryModel.removeSongFromPlaylist(playlistName, songTitle, songArtist);
         System.out.println(result);
     }
 
@@ -183,6 +199,35 @@ public class MusicApp {
         String artistName = scanner.nextLine();
         String result = libraryModel.addSongToLibrary(songTitle, artistName);
         System.out.println(result);
+    }
+    
+    private void albumToLibrary() {
+        System.out.print("Enter song album title: ");
+        String album = scanner.nextLine();
+        System.out.print("Enter artist name: ");
+        String artistName = scanner.nextLine();
+        String result = libraryModel.addSongToLibrary(album, artistName);
+        System.out.println(result);
+    }
+    
+    private void listAllSongs() {
+    	System.out.print(libraryModel.allSongs());
+    }
+    
+    private void listAllArtists() {
+    	System.out.print(libraryModel.allArtists());
+    }
+    
+    private void listAllAlbums() {
+    	System.out.print(libraryModel.allAlbums());
+    }
+    
+    private void listAllPlaylists() {
+    	System.out.print(libraryModel.allPlaylists());
+    }
+    
+    private void listAllFavorites() {
+    	System.out.print(libraryModel.favoriteSongs());
     }
     
     private void rateSong() {
@@ -216,4 +261,3 @@ public class MusicApp {
         view.start();
     }
 }
-

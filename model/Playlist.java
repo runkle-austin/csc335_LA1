@@ -6,12 +6,12 @@ public class Playlist {
 
 	private String playlistName;
 	private ArrayList<Song> songs;
-	private ArrayList<Album> albums;
+	private ArrayList<String> albums;
 
 	public Playlist(String name) {
 	    this.playlistName = name;
 	    this.songs = new ArrayList<Song>();
-	    this.albums = new ArrayList<Album>();
+	    this.albums = new ArrayList<String>();
 	}
 	
 	public String getName() {
@@ -20,19 +20,21 @@ public class Playlist {
 
 	// adds song if not already in playlist
 	public void addSong(Song song) {
-	    if (songs.contains(song) == false) {
+		// check if song already in playlist	
+		boolean inPlaylist = false;
+		for (Song s: songs) {
+			if (s.equals(song)) {
+				inPlaylist = true;
+			}
+		}
+	    if (inPlaylist == false) {
 	        songs.add(song);
 	    }
 	}
-
-	// adds album if not already in playlist
-	public void addAlbum(String albumTitle) {
-		
-	}
 	
-	public String removeSong(String title) {
+	public String removeSong(String title, String artist) {
 	    for(Song s: songs) {
-	    	if(s.getTitle().equals(title)) {
+	    	if(s.getTitle().equals(title) && s.getArtist().equals(artist)) {
 	    		songs.remove(s);
 	    		return title + " was removed\n";
 	    	}
@@ -51,17 +53,4 @@ public class Playlist {
 		}
 		return str;
 	}
-	
-	public String getAllAlbums() {
-		String str = "";
-		if (albums.isEmpty()) {
-			return "Currently No Albums\n";
-		} else {
-			for(Album a: albums) {
-				str += a.toString();
-			}
-		}
-		return str;
-	}
-	
 }

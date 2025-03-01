@@ -19,27 +19,6 @@ public class Album {
 		this.year = year;
 	}
 	
-	// TODO 
-	/* depending on how we decide to implement album, we may want to 
-	 * have a constructor that we can add songs to as we go, rather
-	 * then all at once as an arrayList in the constructor
-	 * 
-	 * I'm suspecting that when we read in the file, we will need to 
-	 * add songs to albums as we go, but not sure
-	 *
-	public Album (String artist, String genre,
-			String title, LocalDate year) {
-		this.songList = new ArrayList<Song>();
-		this.artist = artist;
-		this.genre = genre;
-		this.title = title;
-		this.year = year;
-	}
-	
-	protected void addSong(Song s) {
-		songList.add(s);
-	}*/
-	
 	// Methods
 	public String getTitle() {
 		return title;
